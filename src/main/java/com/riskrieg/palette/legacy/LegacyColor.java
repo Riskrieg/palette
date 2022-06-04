@@ -1,6 +1,6 @@
 /*
  *     Riskrieg, an open-source conflict simulation game.
- *     Copyright (C) 2019-2022 Aaron Yoder <aaronjyoder@gmail.com> and the Riskrieg contributors
+ *     Copyright (C) 2022 Aaron Yoder <aaronjyoder@gmail.com> and the Riskrieg contributors
  *
  *     This program is free software: you can redistribute it and/or modify
  *     it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.riskrieg.palette.legacy.v1;
+package com.riskrieg.palette.legacy;
 
 import com.riskrieg.palette.RkpColor;
 import java.awt.Color;
@@ -25,28 +25,33 @@ import java.util.Objects;
 /**
  * Only included for legacy support purposes. Do not use for any other purpose.
  *
- * @deprecated Use {@link com.riskrieg.palette.RkpColor} instead.
+ * @deprecated Use {@link com.riskrieg.palette.RkpColor instead}
  */
 @Deprecated
-public final class LegacyColorV1 implements Comparable<LegacyColorV1> {
+public record LegacyColor(int id, String name, int r, int g, int b) implements Comparable<LegacyColor> {
 
-  private final LegacyColorIdV1 id;
-  private final String name;
-  private final int r;
-  private final int g;
-  private final int b;
+  public LegacyColor {
+    Objects.requireNonNull(name);
+    if (name.isBlank()) {
+      throw new IllegalStateException("String 'name' cannot be blank");
+    }
+    if (r < 0 || r > 255) {
+      throw new IllegalStateException("LegacyColor value for red must be between 0 and 255, inclusive on either end.");
+    }
+    if (g < 0 || g > 255) {
+      throw new IllegalStateException("LegacyColor value for green must be between 0 and 255, inclusive on either end.");
+    }
+    if (b < 0 || b > 255) {
+      throw new IllegalStateException("LegacyColor value for blue must be between 0 and 255, inclusive on either end.");
+    }
+  }
 
-
-  public LegacyColorV1(LegacyColorIdV1 id, String name, int r, int g, int b) {
-    this.id = id;
-    this.name = name;
-    this.r = r;
-    this.g = g;
-    this.b = b;
+  public LegacyColor(int id, String name, String hex) {
+    this(id, name, Color.decode(hex).getRed(), Color.decode(hex).getGreen(), Color.decode(hex).getBlue());
   }
 
   public RkpColor toRkpColor() {
-    return new RkpColor(id.value(), name, r, g, b);
+    return new RkpColor(id, name, r, g, b);
   }
 
   public Color toAwtColor() {
@@ -54,7 +59,7 @@ public final class LegacyColorV1 implements Comparable<LegacyColorV1> {
   }
 
   @Override
-  public int compareTo(LegacyColorV1 o) {
+  public int compareTo(LegacyColor o) {
     return Integer.compare(this.id(), o.id());
   }
 
@@ -66,8 +71,8 @@ public final class LegacyColorV1 implements Comparable<LegacyColorV1> {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    LegacyColorV1 color = (LegacyColorV1) o;
-    return id.value() == color.id.value();
+    LegacyColor color = (LegacyColor) o;
+    return id == color.id;
   }
 
   @Override
@@ -75,25 +80,4 @@ public final class LegacyColorV1 implements Comparable<LegacyColorV1> {
     return Objects.hash(id);
   }
 
-  public int id() {
-    return id.value();
-  }
-
-  public String name() {
-    return name;
-  }
-
-  public int r() {
-    return r;
-  }
-
-  public int g() {
-    return g;
-  }
-
-  public int b() {
-    return b;
-  }
-
 }
-
