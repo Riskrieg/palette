@@ -29,7 +29,7 @@ import java.util.TreeSet;
 public record RkpPalette(String name,
                          RkpColor textColor, RkpColor borderColor, RkpColor territoryColor,
                          RkpColor landColor, RkpColor waterColor, RkpColor connectionColor,
-                         SortedSet<RkpColor> orderedColors) {
+                         SortedSet<RkpColor> sortedColorSet) {
 
   public static final RkpColor DEFAULT_TEXT_COLOR = new RkpColor(116, 79, 40);
   public static final RkpColor DEFAULT_BORDER_COLOR = new RkpColor(116, 79, 40);
@@ -37,6 +37,9 @@ public record RkpPalette(String name,
   public static final RkpColor DEFAULT_LAND_COLOR = new RkpColor(200, 183, 173);
   public static final RkpColor DEFAULT_WATER_COLOR = new RkpColor(192, 163, 146);
   public static final RkpColor DEFAULT_CONNECTION_COLOR = new RkpColor(148, 125, 111);
+
+  public static final int MINIMUM_SIZE = 2;
+  public static final int MAXIMUM_SIZE = 16;
 
   public RkpPalette {
     Objects.requireNonNull(name);
@@ -46,8 +49,16 @@ public record RkpPalette(String name,
     Objects.requireNonNull(landColor);
     Objects.requireNonNull(waterColor);
     Objects.requireNonNull(connectionColor);
-    Objects.requireNonNull(orderedColors);
-    orderedColors = Collections.unmodifiableSortedSet(orderedColors);
+    Objects.requireNonNull(sortedColorSet);
+    if (name.isBlank()) {
+      throw new IllegalStateException("String 'name' cannot be blank");
+    }
+    if (sortedColorSet.size() < MINIMUM_SIZE) {
+      throw new IllegalStateException("Your color set cannot have fewer than " + MINIMUM_SIZE + " colors defined. You have " + sortedColorSet.size() + " unique items in your set.");
+    } else if (sortedColorSet.size() > MAXIMUM_SIZE) {
+      throw new IllegalStateException("Your color set cannot have more than " + MAXIMUM_SIZE + " colors defined. You have " + sortedColorSet.size() + " unique items in your set.");
+    }
+    sortedColorSet = Collections.unmodifiableSortedSet(sortedColorSet);
   }
 
   public RkpPalette(String name, SortedSet<RkpColor> orderedColors) {
@@ -59,15 +70,15 @@ public record RkpPalette(String name,
   }
 
   public RkpColor first() {
-    return orderedColors.first();
+    return sortedColorSet.first();
   }
 
   public RkpColor last() {
-    return orderedColors.last();
+    return sortedColorSet.last();
   }
 
   public Optional<RkpColor> get(int index) {
-    for (RkpColor rkpColor : orderedColors) {
+    for (RkpColor rkpColor : sortedColorSet) {
       if (rkpColor.order() == index) {
         return Optional.of(rkpColor);
       }
@@ -77,7 +88,7 @@ public record RkpPalette(String name,
 
   public Optional<RkpColor> valueOf(Color color) {
     Objects.requireNonNull(color);
-    for (RkpColor rkpColor : orderedColors) {
+    for (RkpColor rkpColor : sortedColorSet) {
       if (rkpColor.toAwtColor().equals(color)) {
         return Optional.of(rkpColor);
       }
@@ -86,15 +97,15 @@ public record RkpPalette(String name,
   }
 
   public boolean contains(RkpColor color) {
-    return orderedColors.contains(color);
+    return sortedColorSet.contains(color);
   }
 
   public int size() {
-    return orderedColors.size();
+    return sortedColorSet.size();
   }
 
-  public SortedSet<RkpColor> orderedColors() {
-    return Collections.unmodifiableSortedSet(orderedColors);
+  public SortedSet<RkpColor> sortedColorSet() {
+    return Collections.unmodifiableSortedSet(sortedColorSet);
   }
 
   /**
