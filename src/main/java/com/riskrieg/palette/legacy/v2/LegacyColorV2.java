@@ -1,8 +1,15 @@
 package com.riskrieg.palette.legacy.v2;
 
+import com.riskrieg.palette.RkpColor;
 import java.awt.Color;
 import java.util.Objects;
 
+/**
+ * Only included for legacy support purposes. Do not use for any other purpose.
+ *
+ * @deprecated Use {@link com.riskrieg.palette.RkpColor instead}
+ */
+@Deprecated
 public record LegacyColorV2(int id, String name, int r, int g, int b) implements Comparable<LegacyColorV2> {
 
   public LegacyColorV2 {
@@ -25,9 +32,11 @@ public record LegacyColorV2(int id, String name, int r, int g, int b) implements
     this(id, name, Color.decode(hex).getRed(), Color.decode(hex).getGreen(), Color.decode(hex).getBlue());
   }
 
-  // TODO: toOrderedColor
+  public RkpColor toRkpColor() {
+    return new RkpColor(id, name, r, g, b);
+  }
 
-  public Color toColor() {
+  public Color toAwtColor() {
     return new Color(r, g, b);
   }
 

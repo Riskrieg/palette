@@ -1,5 +1,7 @@
 package com.riskrieg.palette.legacy.v2;
 
+import com.riskrieg.palette.RkpColor;
+import com.riskrieg.palette.RkpPalette;
 import java.awt.Color;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,22 +9,17 @@ import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * Only included for legacy support purposes. Do not use for any other purpose.
+ *
+ * @deprecated Use {@link com.riskrieg.palette.RkpPalette instead}
+ */
+@Deprecated
 public record LegacyPaletteV2(String name, SortedSet<LegacyColorV2> set) {
-
-  public static final int MINIMUM_SIZE = 2;
-  public static final int MAXIMUM_SIZE = 16;
 
   public LegacyPaletteV2 {
     Objects.requireNonNull(name);
     Objects.requireNonNull(set);
-    if (name.isBlank()) {
-      throw new IllegalStateException("String 'name' cannot be blank");
-    }
-    if (set.size() < MINIMUM_SIZE) {
-      throw new IllegalStateException("Your color set cannot have fewer than " + MINIMUM_SIZE + " orderedColors defined. You have " + set.size() + " unique items in your set.");
-    } else if (set.size() > MAXIMUM_SIZE) {
-      throw new IllegalStateException("Your color set cannot have more than " + MAXIMUM_SIZE + " orderedColors defined. You have " + set.size() + " unique items in your set.");
-    }
     set = Collections.unmodifiableSortedSet(set);
   }
 
@@ -30,7 +27,13 @@ public record LegacyPaletteV2(String name, SortedSet<LegacyColorV2> set) {
     this(name, new TreeSet<>(Arrays.asList(colors)));
   }
 
-  // TODO: Convert to Palette
+  public RkpPalette toRkpPalette() {
+    SortedSet<RkpColor> orderedColors = new TreeSet<>();
+    for (LegacyColorV2 legacyColorV2 : set) {
+      orderedColors.add(legacyColorV2.toRkpColor());
+    }
+    return new RkpPalette(name, orderedColors);
+  }
 
   public LegacyColorV2 first() {
     return set.first();
@@ -52,7 +55,7 @@ public record LegacyPaletteV2(String name, SortedSet<LegacyColorV2> set) {
   public LegacyColorV2 valueOf(Color color) {
     Objects.requireNonNull(color);
     for (LegacyColorV2 legacyColor : set) {
-      if (legacyColor.toColor().equals(color)) {
+      if (legacyColor.toAwtColor().equals(color)) {
         return legacyColor;
       }
     }
