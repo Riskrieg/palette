@@ -20,7 +20,7 @@ This repository hosts the code for the color palette portion of the project. It 
 <dependency>
   <groupId>com.riskrieg</groupId>
   <artifactId>palette</artifactId>
-  <version>1.1.0-0.2206</version>
+  <version>VERSION</version>
 </dependency>
 ```
 
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.riskrieg:palette:1.1.0-0.2206")
+    implementation("com.riskrieg:palette:VERSION")
 }
 ```
 
