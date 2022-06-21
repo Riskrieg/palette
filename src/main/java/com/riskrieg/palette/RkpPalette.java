@@ -50,8 +50,8 @@ public record RkpPalette(String name,
     sortedColorSet = Collections.unmodifiableSortedSet(sortedColorSet);
   }
 
-  public RkpPalette(String name, SortedSet<RkpColor> orderedColors) {
-    this(name, DEFAULT_TEXT_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_TERRITORY_COLOR, DEFAULT_LAND_COLOR, DEFAULT_WATER_COLOR, DEFAULT_CONNECTION_COLOR, orderedColors);
+  public RkpPalette(String name, SortedSet<RkpColor> sortedColorSet) {
+    this(name, DEFAULT_TEXT_COLOR, DEFAULT_BORDER_COLOR, DEFAULT_TERRITORY_COLOR, DEFAULT_LAND_COLOR, DEFAULT_WATER_COLOR, DEFAULT_CONNECTION_COLOR, sortedColorSet);
   }
 
   public RkpPalette(String name, RkpColor... colors) {
