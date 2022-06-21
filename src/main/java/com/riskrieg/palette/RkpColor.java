@@ -30,7 +30,11 @@ public record RkpColor(int order, String name, int r, int g, int b) implements C
   }
 
   public RkpColor(int r, int g, int b) {
-    this(-1, "Unnamed", r, g, b); // We don't care about order or name if we use this constructor
+    this(Integer.MIN_VALUE, "Unnamed", r, g, b); // We don't care about order or name if we use this constructor
+  }
+
+  public RkpColor(String name, int r, int g, int b) {
+    this(Integer.MIN_VALUE, name, r, g, b); // We don't care about order if we use this constructor
   }
 
   public Color toAwtColor() {

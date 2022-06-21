@@ -20,12 +20,12 @@ public record RkpPalette(String name,
                          RkpColor landColor, RkpColor waterColor, RkpColor connectionColor,
                          SortedSet<RkpColor> sortedColorSet) {
 
-  public static final RkpColor DEFAULT_TEXT_COLOR = new RkpColor(116, 79, 40);
-  public static final RkpColor DEFAULT_BORDER_COLOR = new RkpColor(116, 79, 40);
-  public static final RkpColor DEFAULT_TERRITORY_COLOR = new RkpColor(224, 219, 227);
-  public static final RkpColor DEFAULT_LAND_COLOR = new RkpColor(200, 183, 173);
-  public static final RkpColor DEFAULT_WATER_COLOR = new RkpColor(192, 163, 146);
-  public static final RkpColor DEFAULT_CONNECTION_COLOR = new RkpColor(148, 125, 111);
+  public static final RkpColor DEFAULT_TEXT_COLOR = new RkpColor("Text", 116, 79, 40);
+  public static final RkpColor DEFAULT_BORDER_COLOR = new RkpColor("Border", 116, 79, 40);
+  public static final RkpColor DEFAULT_TERRITORY_COLOR = new RkpColor("Territory", 224, 219, 227);
+  public static final RkpColor DEFAULT_LAND_COLOR = new RkpColor("Land", 200, 183, 173);
+  public static final RkpColor DEFAULT_WATER_COLOR = new RkpColor("Water", 192, 163, 146);
+  public static final RkpColor DEFAULT_CONNECTION_COLOR = new RkpColor("Connection", 148, 125, 111);
 
   public static final int MINIMUM_SIZE = 2;
   public static final int MAXIMUM_SIZE = 16;
