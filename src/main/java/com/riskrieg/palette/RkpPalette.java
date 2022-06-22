@@ -102,8 +102,8 @@ public record RkpPalette(String name,
    *
    * @return the default color palette
    */
-  public static RkpPalette standard() {
-    return new RkpPalette("Default",
+  public static RkpPalette standard16() {
+    return new RkpPalette("Default-16",
         new RkpColor(0, "Salmon", 255, 140, 150), new RkpColor(1, "Lavender", 155, 120, 190),
         new RkpColor(2, "Thistle", 215, 190, 240), new RkpColor(3, "Ice", 195, 230, 255),
         new RkpColor(4, "Sky", 120, 165, 215), new RkpColor(5, "Sea", 140, 225, 175),
@@ -120,8 +120,8 @@ public record RkpPalette(String name,
    *
    * @return the original color palette
    */
-  public static RkpPalette original() {
-    return new RkpPalette("Original",
+  public static RkpPalette original16() {
+    return new RkpPalette("Original-16",
         new RkpColor(0, "Cadmium", 240, 130, 50), new RkpColor(1, "Sun", 241, 224, 82),
         new RkpColor(2, "Sod", 171, 191, 94), new RkpColor(3, "Sea", 140, 198, 183),
         new RkpColor(4, "Sky", 122, 165, 217), new RkpColor(5, "Burgundy", 111, 16, 56),
@@ -130,6 +130,43 @@ public record RkpPalette(String name,
         new RkpColor(10, "Indigo", 39, 25, 79), new RkpColor(11, "Amethyst", 82, 28, 124),
         new RkpColor(12, "Gold", 227, 170, 49), new RkpColor(13, "Tenné", 193, 146, 114),
         new RkpColor(14, "Gunmetal", 170, 159, 140), new RkpColor(15, "Aphotic", 64, 49, 51)
+    );
+  }
+
+  public static RkpPalette desatur8() {
+    return new RkpPalette("Desatur-8",
+        new RkpColor(0, "Merino", 240, 240, 225),
+        new RkpColor(1, "Canary", 255, 255, 143),
+        new RkpColor(2, "Algae", 123, 224, 152),
+        new RkpColor(3, "Moonstone", 132, 154, 216),
+        new RkpColor(4, "Peach", 232, 179, 130),
+        new RkpColor(5, "Blush", 216, 130, 142),
+        new RkpColor(6, "Lilac", 167, 118, 193),
+        new RkpColor(7, "Flint", 118, 114, 120)
+    );
+  }
+
+  public static RkpPalette pollen8() {
+    return new RkpPalette("Pollen-8",
+        new RkpColor(0, "Verdigris", 52, 172, 186),
+        new RkpColor(1, "Bermuda", 114, 220, 187),
+        new RkpColor(2, "Powder", 255, 231, 214),
+        new RkpColor(3, "Jasmine", 255, 224, 126),
+        new RkpColor(4, "Flamingo", 255, 167, 165),
+        new RkpColor(5, "Penk", 238, 106, 124),
+        new RkpColor(6, "Plum", 171, 86, 117),
+        new RkpColor(7, "Ferra", 186, 108, 120)
+    );
+  }
+
+  public static RkpPalette gothic6() {
+    return new RkpPalette("Gothic-6",
+        new RkpColor(0, "Mercury", 230, 230, 236),
+        new RkpColor(1, "Heather", 193, 193, 210),
+        new RkpColor(2, "Steel", 128, 128, 164),
+        new RkpColor(3, "Space", 51, 51, 70),
+        new RkpColor(4, "Mirage", 26, 26, 36),
+        new RkpColor(5, "Onyx", 14, 14, 18)
     );
   }
 
