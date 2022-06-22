@@ -9,7 +9,7 @@ plugins {
 // gradlew publishToSonatype closeSonatypeStagingRepository for staging and manual release
 // gradlew publishToSonatype closeAndReleaseSonatypeStagingRepository for automatic release
 
-val versionObject = Version(breaking = "1", minor = "1", nonbreaking = "0", revision = "3", date = "2206")
+val versionObject = Version(breaking = "1", minor = "1", nonbreaking = "0", revision = "4", date = "2206")
 project.group = "com.riskrieg"
 project.version = "$versionObject"
 

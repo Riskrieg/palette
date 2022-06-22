@@ -43,7 +43,8 @@ public record RkpPalette(String name,
       throw new IllegalStateException("String 'name' cannot be blank");
     }
     if (sortedColorSet.size() < MINIMUM_SIZE) {
-      throw new IllegalStateException("Your color set cannot have fewer than " + MINIMUM_SIZE + " colors defined. You have " + sortedColorSet.size() + " unique items in your set.");
+      throw new IllegalStateException(
+          "Your color set cannot have fewer than " + MINIMUM_SIZE + " colors defined. You have " + sortedColorSet.size() + " unique items in your set.");
     } else if (sortedColorSet.size() > MAXIMUM_SIZE) {
       throw new IllegalStateException("Your color set cannot have more than " + MAXIMUM_SIZE + " colors defined. You have " + sortedColorSet.size() + " unique items in your set.");
     }
@@ -138,7 +139,7 @@ public record RkpPalette(String name,
         new RkpColor(0, "Merino", 240, 240, 225),
         new RkpColor(1, "Canary", 255, 255, 143),
         new RkpColor(2, "Algae", 123, 224, 152),
-        new RkpColor(3, "Moonstone", 132, 154, 216),
+        new RkpColor(3, "Bell", 132, 154, 216),
         new RkpColor(4, "Peach", 232, 179, 130),
         new RkpColor(5, "Blush", 216, 130, 142),
         new RkpColor(6, "Lilac", 167, 118, 193),
